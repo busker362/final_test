@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mvc.member.model.dao.MemberDAO">
+
+    <resultMap type="com.mvc.member.model.dto.MemberDTO" id="memberResultMap">
+        <id property="memberCode" column="MEMBER_CODE"/>
+        <result property="memberName" column="MEMBER_NAME"/>
+        <result property="memberAge" column="MEMBER_AGE"/>
+        <result property="backNumber" column="BACK_NUMBER"/>
+        <result property="position" column="POSITION"/>
+        <result property="height" column="HEIGHT"/>
+        <result property="weight" column="WEIGHT"/>
+        <result property="teamCode" column="TEAM_CODE"/>
+
+    </resultMap>
+
+    <select id="selectAllMemberList" resultMap="memberResultMap">
+        SELECT MEMBER_CODE
+             , MEMBER_NAME
+             , MEMBER_AGE
+             , BACK_NUMBER
+             , POSITION
+             , HEIGHT
+             , WEIGHT
+             , TEAM_CODE
+        FROM MEMBER
+    </select>
+
+    <select id="selectMembersByPosition" parameterType="java.lang.String" resultMap="memberResultMap">
+        SELECT MEMBER_CODE
+        , MEMBER_NAME
+        , MEMBER_AGE
+        , BACK_NUMBER
+        , POSITION
+        , HEIGHT
+        , WEIGHT
+        , TEAM_CODE
+        FROM MEMBER
+        <where>
+            <if test="position != null">
+                POSITION = #{ position }
+            </if>
+            <if test="team != null">
+                TEAM_CODE = #{ position }
+            </if>
+<!--                <when test="option != null and option eq 'salesStore'">-->
+<!--                    <if test="value eq '백화점'">-->
+<!--                        DISCOUNT_RATE = 0-->
+<!--                    </if>-->
+<!--                    <if test="value eq '아울렛'">-->
+<!--                        DISCOUNT_RATE &gt;= 1-->
+<!--                    </if>-->
+<!--                </when>-->
+<!--                <when test="option != null and option eq 'newProduct'">-->
+<!--                    SUBSTR(RELEASE_DATE,5,2) = DATE_FORMAT(CURDATE(), '%m')-->
+<!--                </when>-->
+<!--                <otherwise>-->
+<!--                    PRODUCTION_STATUS = 'N'-->
+<!--                </otherwise>-->
+        </where>
+    </select>
+
+    <select id="selectNewMemberCode" resultType="String">
+        SELECT MAX(MEMBER_CODE) + 1 AS MEMBER_CODE
+        FROM MEMBER;
+    </select>
+    <insert id="insertMember" parameterType="MemberDTO">
+      INSERT
+        INTO MEMBER (MEMBER_NAME, MEMBER_AGE, BACK_NUMBER, POSITION
+        , HEIGHT, WEIGHT, TEAM_CODE )
+        VALUES ( #{ memberName },#{ memberAge },#{ backNumber }, #{ position }, #{ height }
+        , #{ weight }, #{ teamCode })
+    </insert>
+
+    <update id="updateMember" parameterType="MemberDTO">
+        UPDATE MEMBER
+        <set>
+            <if test="memberAge != null">
+                MEMBER_AGE = #{ memberAge}
+            </if>
+            <if test=" backNumber  != null">
+                ,BACK_NUMBER = #{ backNumber }
+            </if>
+            <if test=" position  != null">
+                ,POSITION = #{ position }
+            </if>
+            <if test=" height  != null">
+                ,HEIGHT = #{ height }
+            </if>
+            <if test=" weight  != null">
+                ,WEIGHT = #{ weight }
+            </if>
+            <if test=" teamCode  != null">
+                ,TEAM_CODE = #{ teamCode }
+            </if>
+        </set>
+        WHERE MEMBER_CODE = #{ memberCode }
+    </update>
+
+    <delete id="deleteMember" parameterType="hashMap">
+        DELETE
+        FROM MEMBER
+        WHERE MEMBER_CODE = #{ memberCode }
+    </delete>
+
+</mapper>
