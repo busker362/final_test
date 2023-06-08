@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>선수 목록 전체 조회</h1>
+    <h1>선수 목록 조회</h1>
     <table>
         <tr>
             <th>선수번호</th>
@@ -15,7 +15,9 @@
             <th>포지션</th>
             <th>키</th>
             <th>몸무게</th>
+            <th>소속팀코드</th>
             <th>소속팀</th>
+            <th>소속팀지역</th>
         </tr>
         <c:forEach items="${ requestScope.memberList }" var="member">
             <tr>
@@ -27,6 +29,8 @@
                 <td>${ member.height }</td>
                 <td>${ member.weight }</td>
                 <td>${ member.teamCode }</td>
+                <td>${ member.teamName }</td>
+                <td>${ member.region }</td>
             </tr>
         </c:forEach>
     </table>

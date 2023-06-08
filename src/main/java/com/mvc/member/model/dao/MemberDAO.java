@@ -11,8 +11,8 @@ public interface MemberDAO {
 
     List<MemberDTO> selectAllMemberList();
     String selectNewMemberCode();
-    List<MemberDTO> selectMemberByCondition(SearchCondition searchCondition);
     List<MemberDTO> selectMembersByPosition(String position);
+    List<MemberDTO> selectMembersByTeam(String team);
 
     int insertMember(MemberDTO member);
 

@@ -10,9 +10,12 @@ public class MemberDTO implements java.io.Serializable {
     private String height;
     private String weight;
     private String teamCode;
+
+    private String teamName;
+    private String region;
     public MemberDTO() {}
 
-    public MemberDTO(String memberCode, String memberName, String memberAge, String backNumber, String position, String height, String weight, String teamCode) {
+    public MemberDTO(String memberCode, String memberName, String memberAge, String backNumber, String position, String height, String weight, String teamCode, String teamName, String region) {
         this.memberCode = memberCode;
         this.memberName = memberName;
         this.memberAge = memberAge;
@@ -21,6 +24,8 @@ public class MemberDTO implements java.io.Serializable {
         this.height = height;
         this.weight = weight;
         this.teamCode = teamCode;
+        this.teamName = teamName;
+        this.region = region;
     }
 
     public String getMemberCode() {
@@ -87,6 +92,22 @@ public class MemberDTO implements java.io.Serializable {
         this.teamCode = teamCode;
     }
 
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
     @Override
     public String toString() {
         return "MemberDTO{" +
@@ -98,6 +119,8 @@ public class MemberDTO implements java.io.Serializable {
                 ", height='" + height + '\'' +
                 ", weight='" + weight + '\'' +
                 ", teamCode='" + teamCode + '\'' +
+                ", teamName='" + teamName + '\'' +
+                ", region='" + region + '\'' +
                 '}';
     }
 }

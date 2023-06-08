@@ -16,10 +16,10 @@ public class SelectMemberByTeamServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String team = request.getParameter("team");
+        String team = request.getParameter("teamCode");
         System.out.println("team: " + team);
         MemberService memberService = new MemberService();
-        List<MemberDTO> membersByTeam = memberService.selectMembersByPosition(team);
+        List<MemberDTO> membersByTeam = memberService.selectMembersByTeam(team);
 
         for(MemberDTO member : membersByTeam) {
             System.out.println(member);

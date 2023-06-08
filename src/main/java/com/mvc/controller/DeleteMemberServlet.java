@@ -14,8 +14,6 @@ public class DeleteMemberServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-
         String memberCode = request.getParameter("memberCode");
 
         int result = new MemberService().deleteMember(memberCode);

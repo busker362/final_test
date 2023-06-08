@@ -15,8 +15,6 @@ public class InsertMemberServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-
         String memberName = request.getParameter("memberName");
         String memberAge = request.getParameter("memberAge");
         String backNumber = request.getParameter("backNumber");

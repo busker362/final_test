@@ -15,18 +15,20 @@ public class UpdateEmpServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
-
         String memberCode = request.getParameter("memberCode");
         String memberAge = request.getParameter("memberAge");
         String height = request.getParameter("height");
         String weight = request.getParameter("weight");
+        String position = request.getParameter("position");
+        String teamCode = request.getParameter("teamCode");
 
         MemberDTO member = new MemberDTO();
         member.setMemberCode(memberCode);
         member.setMemberAge(memberAge);
         member.setHeight(height);
         member.setWeight(weight);
+        member.setPosition(position);
+        member.setTeamCode(teamCode);
 
 
         int result = new MemberService().updateMember(member);

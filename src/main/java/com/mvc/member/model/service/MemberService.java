@@ -54,24 +54,11 @@ public class MemberService {
         SqlSession sqlSession = getSqlSession();
         memberDAO = sqlSession.getMapper(MemberDAO.class);
 
-        List<MemberDTO> memberList = memberDAO.selectMembersByPosition(team);
+        List<MemberDTO> memberList = memberDAO.selectMembersByTeam(team);
 
         sqlSession.close();
 
         return memberList;
-    }
-
-    public List<MemberDTO> selectProductByCondition(SearchCondition searchCondition) {
-
-        SqlSession sqlSession = getSqlSession();
-        memberDAO = sqlSession.getMapper(MemberDAO.class);
-
-        List<MemberDTO> productList = memberDAO.selectMemberByCondition(searchCondition);
-
-        sqlSession.close();
-
-        return productList;
-
     }
 
     public int insertMember(MemberDTO member) {

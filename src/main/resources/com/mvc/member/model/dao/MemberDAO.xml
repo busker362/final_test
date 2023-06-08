@@ -3,6 +3,7 @@
 <mapper namespace="com.mvc.member.model.dao.MemberDAO">
 
     <resultMap type="com.mvc.member.model.dto.MemberDTO" id="memberResultMap">
+
         <id property="memberCode" column="MEMBER_CODE"/>
         <result property="memberName" column="MEMBER_NAME"/>
         <result property="memberAge" column="MEMBER_AGE"/>
@@ -11,52 +12,62 @@
         <result property="height" column="HEIGHT"/>
         <result property="weight" column="WEIGHT"/>
         <result property="teamCode" column="TEAM_CODE"/>
-
+        <result property="teamName" column="TEAM_NAME"/>
+        <result property="region" column="REGION"/>
     </resultMap>
 
     <select id="selectAllMemberList" resultMap="memberResultMap">
-        SELECT MEMBER_CODE
-             , MEMBER_NAME
-             , MEMBER_AGE
-             , BACK_NUMBER
-             , POSITION
-             , HEIGHT
-             , WEIGHT
-             , TEAM_CODE
-        FROM MEMBER
+        SELECT M.MEMBER_CODE
+             , M.MEMBER_NAME
+             , M.MEMBER_AGE
+             , M.BACK_NUMBER
+             , M.POSITION
+             , M.HEIGHT
+             , M.WEIGHT
+             , M.TEAM_CODE
+             , T.TEAM_NAME
+             , T.REGION
+        FROM MEMBER M, TEAM T
+        WHERE M.TEAM_CODE = T.TEAM_CODE
     </select>
 
     <select id="selectMembersByPosition" parameterType="java.lang.String" resultMap="memberResultMap">
-        SELECT MEMBER_CODE
-        , MEMBER_NAME
-        , MEMBER_AGE
-        , BACK_NUMBER
-        , POSITION
-        , HEIGHT
-        , WEIGHT
-        , TEAM_CODE
-        FROM MEMBER
+        SELECT M.MEMBER_CODE
+        , M.MEMBER_NAME
+        , M.MEMBER_AGE
+        , M.BACK_NUMBER
+        , M.POSITION
+        , M.HEIGHT
+        , M.WEIGHT
+        , M.TEAM_CODE
+        , T.TEAM_NAME
+        , T.REGION
+        FROM MEMBER M, TEAM T
         <where>
+            M.TEAM_CODE = T.TEAM_CODE
             <if test="position != null">
-                POSITION = #{ position }
+               AND M.POSITION = #{ position }
             </if>
-            <if test="team != null">
-                TEAM_CODE = #{ position }
+        </where>
+    </select>
+
+    <select id="selectMembersByTeam" parameterType="java.lang.String" resultMap="memberResultMap">
+        SELECT M.MEMBER_CODE
+        , M.MEMBER_NAME
+        , M.MEMBER_AGE
+        , M.BACK_NUMBER
+        , M.POSITION
+        , M.HEIGHT
+        , M.WEIGHT
+        , M.TEAM_CODE
+        , T.TEAM_NAME
+        , T.REGION
+        FROM MEMBER M, TEAM T
+        <where>
+            M.TEAM_CODE = T.TEAM_CODE
+            <if test="teamCode != null">
+                AND M.TEAM_CODE = #{teamCode}
             </if>
-<!--                <when test="option != null and option eq 'salesStore'">-->
-<!--                    <if test="value eq '백화점'">-->
-<!--                        DISCOUNT_RATE = 0-->
-<!--                    </if>-->
-<!--                    <if test="value eq '아울렛'">-->
-<!--                        DISCOUNT_RATE &gt;= 1-->
-<!--                    </if>-->
-<!--                </when>-->
-<!--                <when test="option != null and option eq 'newProduct'">-->
-<!--                    SUBSTR(RELEASE_DATE,5,2) = DATE_FORMAT(CURDATE(), '%m')-->
-<!--                </when>-->
-<!--                <otherwise>-->
-<!--                    PRODUCTION_STATUS = 'N'-->
-<!--                </otherwise>-->
         </where>
     </select>
 
@@ -75,20 +86,20 @@
     <update id="updateMember" parameterType="MemberDTO">
         UPDATE MEMBER
         <set>
-            <if test="memberAge != null">
+            <if test="memberAge != null"    >
                 MEMBER_AGE = #{ memberAge}
             </if>
             <if test=" backNumber  != null">
                 ,BACK_NUMBER = #{ backNumber }
-            </if>
-            <if test=" position  != null">
-                ,POSITION = #{ position }
             </if>
             <if test=" height  != null">
                 ,HEIGHT = #{ height }
             </if>
             <if test=" weight  != null">
                 ,WEIGHT = #{ weight }
+            </if>
+            <if test=" position  != null">
+                ,POSITION = #{ position }
             </if>
             <if test=" teamCode  != null">
                 ,TEAM_CODE = #{ teamCode }
