@@ -13,7 +13,7 @@
     </context-param>
     <filter>
         <filter-name>encoding</filter-name>
-        <filter-class>com.mvc.common.filter.EncodingFilter</filter-class>
+        <filter-class>com.mvc.filter.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding-type</param-name>
             <param-value>UTF-8</param-value>

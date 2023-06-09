@@ -1,4 +1,4 @@
-package com.mvc.common.config;
+package com.mvc.config;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

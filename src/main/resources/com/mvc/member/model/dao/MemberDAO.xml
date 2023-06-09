@@ -31,6 +31,23 @@
         WHERE M.TEAM_CODE = T.TEAM_CODE
     </select>
 
+    <select id="selectOneMemberByCode" resultMap="memberResultMap">
+        SELECT M.MEMBER_CODE
+             , M.MEMBER_NAME
+             , M.MEMBER_AGE
+             , M.BACK_NUMBER
+             , M.POSITION
+             , M.HEIGHT
+             , M.WEIGHT
+             , M.TEAM_CODE
+             , T.TEAM_NAME
+             , T.REGION
+        FROM MEMBER M, TEAM T
+        WHERE M.TEAM_CODE = T.TEAM_CODE
+        AND M.MEMBER_CODE = #{ memberCode }
+
+    </select>
+
     <select id="selectMembersByPosition" parameterType="java.lang.String" resultMap="memberResultMap">
         SELECT M.MEMBER_CODE
         , M.MEMBER_NAME

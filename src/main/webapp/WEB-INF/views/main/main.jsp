@@ -8,6 +8,7 @@
 <jsp:include page="../common/header.jsp" />
 <ul>
     <li><jsp:include page="/WEB-INF/views/common/search.jsp" /></li>
+    <li><jsp:include page="/WEB-INF/views/common/selectMemberCode.jsp" /></li>
     <li><jsp:include page="/WEB-INF/views/common/selectposition.jsp" /></li>
     <li><jsp:include page="/WEB-INF/views/common/selectteam.jsp" /></li>
     <li><jsp:include page="/WEB-INF/views/common/insert.jsp" /></li>

@@ -5,7 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+
     <h1>선수 목록 조회</h1>
+    <jsp:text>선수 명단</jsp:text>
     <table>
         <tr>
             <th>선수번호</th>

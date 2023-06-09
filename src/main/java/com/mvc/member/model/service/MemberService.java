@@ -34,7 +34,6 @@ public class MemberService {
 
         sqlSession.close();
 
-
         return newMemberCode;
         }
 
@@ -44,6 +43,16 @@ public class MemberService {
         memberDAO = sqlSession.getMapper(MemberDAO.class);
 
         List<MemberDTO> memberList = memberDAO.selectMembersByPosition(position);
+
+        sqlSession.close();
+
+        return memberList;
+    }  public  MemberDTO selectOneMemberByCode(String memberCode) {
+
+        SqlSession sqlSession = getSqlSession();
+        memberDAO = sqlSession.getMapper(MemberDAO.class);
+
+        MemberDTO memberList = memberDAO.selectOneMemberByCode(memberCode);
 
         sqlSession.close();
 

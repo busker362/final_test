@@ -4,6 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Welcome to MVC land!</h1>
+    <h1>선수 관리 프로그램입니다.</h1>
 </body>
 </html>
